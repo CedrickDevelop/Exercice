@@ -1,7 +1,20 @@
-{% extends "::base.html.twig" %}
+{% extends "base.html.twig" %}
 
-{% block title %}AppBundle:Departement:Ajout{% endblock %}
+{% block title %}Ajout d'un departement{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Departement:Ajout page</h1>
+<h1>Page d'ajout</h1>
+
+{{ form_start(form, {'attr': {'class': 'w-50 m-5'}})}}
+
+<div class="mb-3">
+  {{ form_widget(form)}}
+</div>
+
+<div class="mb-3">
+ {{ form_widget(form.submit, {'label':'AddDepartement'})}}
+</div>
+
+{{ form_end(form)}}
+
 {% endblock %}
