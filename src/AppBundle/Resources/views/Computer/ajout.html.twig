@@ -1,9 +1,9 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Ajout d'un departement{% endblock %}
+{% block title %}Ajout d'un computer{% endblock %}
 
 {% block body %}
-<h1 class="text-center text-dark mt-5">Page d'ajout</h1>
+<h1 class="text-center text-dark mt-5">Page d'ajout d'un computer</h1>
 
 {% for message in app.flashes('error') %}
     <div class="alert alert-danger">
@@ -18,7 +18,8 @@
 </div>
 
 <div class="mb-3">
- {{ form_widget(form.submit, {'label':'AddDepartement'})}}
+ {# {{ form_widget(form.submit, {'label':'AddDepartement'})}} #}
+
 </div>
 
 {{ form_end(form)}}

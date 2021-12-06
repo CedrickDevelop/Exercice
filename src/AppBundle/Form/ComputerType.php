@@ -3,6 +3,7 @@
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,7 +14,13 @@ class ComputerType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('model')->add('system')->add('purchase')->add('nameDepartement');
+        $builder
+        ->add('model')
+        ->add('system')
+        ->add('purchase', DateType::class, [
+            'widget'    =>  'single_text'
+        ])
+        ->add('nameDepartement');
     }/**
      * {@inheritdoc}
      */

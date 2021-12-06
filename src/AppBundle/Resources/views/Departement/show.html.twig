@@ -1,7 +1,79 @@
 {% extends "base.html.twig" %}
 
-{% block title %}AppBundle:Departement:Show{% endblock %}
+{% block title %}Affichage départements {% endblock %}
 
 {% block body %}
-<h1>Welcome to the Departement:Show page</h1>
+
+{# TITRE & BOUTON AJOUTER UN ELEMENT #}
+<h1 class="text-center mt-5">Affichage départements</h1>
+
+<a class="btn btn-primary ms-5" href="{{path('AddDepartement')}}">Ajouter un nouvel élément</a>
+
+
+
+{# TABLEAU DES DATAS  #}
+<table class="table table-primary table-hover m-5 w-75">
+  
+  <thead>
+    <tr>
+      <th scope="col">Nom</th>
+      <th scope="col">Domaine</th>
+      <th scope="col">Voir</th>
+      <th scope="col">Modifier</th>
+      {# <th scope="col">Supprimer</th> #}
+      <th scope="col">Supprimer</th>
+      <th scope="col">Ajout Computer</th>
+    </tr>
+  </thead>
+  
+  <tbody>
+    
+    {% for d in departement %}
+
+    {# MODAL DE VERIFICATION LORS DE SUPPRESSION #}
+    {# <div class="modal" id="exampleModal_{{d.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Supression d'une data</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>Souhaitez-vous supprimer définitvement cette donnée ?</p> 
+          </div>
+          <div class="modal-footer">
+            <a type="button" class="btn btn-danger" data-bs-dismiss="modal">Annuler</a>
+            <a class="btn btn-success" href="{{path('Delete', {'id':d.id})}}">Effacer</button>
+          </div>
+        </div>
+      </div>
+    </div> #}
+
+    <tr>
+      <td>{{d.name}}</td>
+      <td>{{d.domaine}}</td>
+      <td><a class="btn btn-info" href="{{path('AfficherOne', {'id':d.id})}}">Info</a></td>
+      <td><a class="btn btn-warning" href="{{path('Update', {'id':d.id})}}">Modifier</a></td>
+      <td><a class="btn btn-danger" href="{{path('Delete', {'id':d.id})}}">Supprimer</a></td>
+      {# <td><a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal_{{d.id}}">Effacer</td> #}
+      <td><a class="btn btn-danger" href="{{path('AddComputer', {'id':d.id})}}">Ajout Computer</a></td>
+    </tr>
+    
+    
+    {% endfor %}
+
+  </tbody>
+</table>
+
+{% if oneDepartement is defined %}  
+
+<div class="card m-5" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{oneDepartement.name}}</h5>
+    <p class="card-text">{{oneDepartement.domaine}}</p>
+  </div>
+</div>
+{% endif %}
+
+
 {% endblock %}

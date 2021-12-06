@@ -35,7 +35,9 @@ class DepartementType extends AbstractType
             // 'expanded'  =>true       // Permet de transformer en bouton radio
         ])
         ->add('submit', SubmitType::class, [
-
+            'attr'  =>  [
+                'class' => 'btn btn-success mt-4 w-100'
+            ]
         ]);
     }/**
      * {@inheritdoc}

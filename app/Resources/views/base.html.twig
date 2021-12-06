@@ -10,29 +10,24 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        <nav>
 
-            <ul class="nav">
-        
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="{{path('Departement')}}">Ajout</a>
-                </li>
-            
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="{{path('Afficher')}}">Afficher</a>
-                </li>
-            
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="{{path('Delete')}}">Effacer</a>
-                </li>
-            
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="{{path('Update')}}">Update</a>
-                </li>
-             
-              </ul>
+      <nav class="navbar navbar-expand-lg navbar-light bg-success" style="background-color: #e3f2fd;">
+        <div class="container-fluid">
 
-        </nav>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-link text-light" href="{{path('AddDepartement')}}">Ajout Departement|</a>
+              <a class="nav-link text-light" href="{{path('Afficher')}}">Afficher Departement|</a>
+              <a class="nav-link text-light" href="{{path('AddComputer')}}">Ajout Computer |</a>
+              <a class="nav-link text-light" href="{{path('showComputer')}}">Afficher Computer |</a>
+
+
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
 

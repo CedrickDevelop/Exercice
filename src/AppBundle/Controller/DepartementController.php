@@ -14,7 +14,7 @@ use AppBundle\Form\DepartementType;
 class DepartementController extends Controller
 {
     /**
-     * @Route("/Ajout", name="Departement")
+     * @Route("/Ajout", name="AddDepartement")
      */
     public function AjoutAction(Request $request)
     {
@@ -27,10 +27,18 @@ class DepartementController extends Controller
 
         if ($formDep->isSubmitted())
         {
-            $cnx->persist($dep);
-            $cnx->flush();
+            $domain = $request->get('appbundle_departement')['domaine'];
+            
+            if ($domain == 0 ){
+                $this->addFlash('error', 'Votre domaine n\'est pas bon');
+            } else {
 
-            return $this->redirectToRoute('Afficher');
+                $cnx->persist($dep);
+                $cnx->flush();
+    
+                return $this->redirectToRoute('Afficher');
+            }
+
 
         }
 
@@ -44,28 +52,74 @@ class DepartementController extends Controller
      */
     public function ShowAction()
     {
+
+        $cnx = $this->getDoctrine()->getManager();
+
+        $departement = $cnx->getRepository(Departement::class)->findAll();
+
         return $this->render('@App/Departement/show.html.twig', [
-            
+            'departement'   =>  $departement
         ]);
     }
 
     /**
-     * @Route("/Delete", name="Delete")
+     * @Route("/ShowOne/{id}", name="AfficherOne")
      */
-    public function DeleteAction()
+    public function ShowOneAction($id)
     {
-        return $this->render('@App/Departement/delete.html.twig', [
-            
+
+        $cnx = $this->getDoctrine()->getManager();
+        
+        $departement = $cnx->getRepository(Departement::class)->findAll();
+
+        $OneDepartement = $cnx->getRepository(Departement::class)->findOneBy(['id'=>$id]);
+
+        return $this->render('@App/Departement/show.html.twig', [
+            'departement'   =>  $departement,
+            'oneDepartement'=>  $OneDepartement
         ]);
     }
 
     /**
-     * @Route("/Update", name="Update")
+     * @Route("/Delete/{id}", name="Delete")
      */
-    public function UpdateAction()
+    public function DeleteAction($id)
     {
-        return $this->render('@App/Departement/update.html.twig', [
-            
+
+        $cnx = $this->getDoctrine()->getManager();
+
+        $dep = $cnx->getRepository(Departement::class)->findOneBy(['id'=>$id]);
+
+        $cnx->remove($dep);
+        $cnx->flush();
+
+
+        return $this->redirectToRoute('Afficher');
+    }
+
+    /**
+     * @Route("/Update/{id}", name="Update")
+     */
+    public function UpdateAction($id, Request $request)
+    {
+
+        $cnx = $this->getDoctrine()->getManager();
+        
+        $dep = $cnx->getRepository(Departement::class)->findOneBy(['id'=>$id]);
+
+        $form = $this->createForm(DepartementType::class, $dep);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()){
+            $cnx->persist($dep);
+            $cnx->flush();
+
+            return $this->redirectToRoute('Afficher');
+        }
+
+
+        return $this->render('@App/Departement/ajout.html.twig', [
+            'form'  =>  $form->createView()
         ]);
     }
 
