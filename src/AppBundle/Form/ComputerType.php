@@ -4,6 +4,7 @@ namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -17,10 +18,13 @@ class ComputerType extends AbstractType
         $builder
         ->add('model')
         ->add('system')
+        ->add('macAdresse')
         ->add('purchase', DateType::class, [
             'widget'    =>  'single_text'
         ])
-        ->add('nameDepartement');
+        ->add('submit', SubmitType::class, [
+            'label' =>'AddComputer'
+        ]);
     }/**
      * {@inheritdoc}
      */

@@ -163,28 +163,4 @@ class Computer
     {
         return $this->nameDepartement;
     }
-
-    /**
-     * Set macAdresse
-     *
-     * @param string $macAdresse
-     *
-     * @return Computer
-     */
-    public function setMacAdresse($macAdresse)
-    {
-        $this->macAdresse = $macAdresse;
-
-        return $this;
-    }
-
-    /**
-     * Get macAdresse
-     *
-     * @return string
-     */
-    public function getMacAdresse()
-    {
-        return $this->macAdresse;
-    }
 }
