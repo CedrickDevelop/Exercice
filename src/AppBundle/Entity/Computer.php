@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Entity\Departement;
 
 /**
@@ -26,6 +27,8 @@ class Computer
      * @var string
      *
      * @ORM\Column(name="model", type="string", length=255)
+     * @Assert\NotBlank(message="Ce champ est obligatoire")
+     * @Assert\Length(min="2", max="12", minMessage="Il doit y avoir au moins {{ limit }} caractères")
      */
     private $model;
 
@@ -33,6 +36,8 @@ class Computer
      * @var string
      *
      * @ORM\Column(name="system", type="string", length=255)
+     * @Assert\NotBlank(message="Ce champ est obligatoire")
+     * @Assert\Length(min="2", max="12", minMessage="Il doit y avoir au moins {{ limit }} caractères")
      */
     private $system;
     
@@ -40,13 +45,14 @@ class Computer
      * @var string
      *
      * @ORM\Column(name="macAdresse", type="string", length=255)
+     * @Assert\NotBlank(message="Ce champ est obligatoire")
      */
     private $macAdresse;
     
     /**
      * @var string
      *
-     * @ORM\Column(name="images", type="array")
+     * @ORM\Column(name="images", type="array", nullable=true)
      */
     private $images;
 

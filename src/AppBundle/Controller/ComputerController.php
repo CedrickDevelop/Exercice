@@ -29,7 +29,7 @@ class ComputerController extends Controller
     $form = $this->createForm(ComputerType::class, $computer);
     $form->handleRequest($request);
 
-    if($form->isSubmitted()){
+    if($form->isSubmitted() && $form->isValid()){
       $file = $form->get('images')->getData();
       // MISE EN FORME PHOTO
       
