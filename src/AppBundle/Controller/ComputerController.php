@@ -30,6 +30,36 @@ class ComputerController extends Controller
     $form->handleRequest($request);
 
     if($form->isSubmitted()){
+      $file = $form->get('images')->getData();
+      // MISE EN FORME PHOTO
+      
+      // TECHNIQUE 1 AVEC FOREACH
+      // $dataForm = $req->files->get('appBundle_computer')['images'];
+      // $imgArray=array();
+      // foreach($file as $key){
+      //   $nameImg = pathinfo($key->getClientOriginalName(), PATHINFO_FILENAME).'.'$key->guessExtension();
+      //   array_push($imgArray, $nameImg);
+      //   $key->move($this->getParameter('UploadsDir'), $nameImg);
+      // }
+
+      // TECHNIQUE 2 AVEC BOUCLE FOR
+      $photo = [];
+      for($i=0; $i<count($file); $i++){
+        
+        // sprintf('%s_%s.%s', $file[$i]->getClientOriginalName(), uniqid(), $file[$i]->guessExtension()); // technique possible pour le traitement des noms
+
+        $photoname[$i] = pathinfo($file[$i]->getClientOriginalName(), PATHINFO_FILENAME);
+        $extension[$i] = $file[$i]->guessExtension();
+
+        $uni = uniqid();
+
+        $photo[$i] = $uni.'_'.$photoname[$i].'.'.$extension[$i];
+
+        $file[$i]->move($this->getParameter('UploadsDir'), $photo[$i]);
+      }    
+
+      $computer->setImages($photo);      
+
       //On le set directement avec l'entite departement. Comme on recupere les infos de l'entite il va detecter automatiquement les setters et les getters
       $computer->setNameDepartement($departement);
       $cnx->persist($computer);
@@ -53,9 +83,12 @@ class ComputerController extends Controller
   public function showAction(Request $request)
   {
 
+    $cnx = $this->getDoctrine()->getManager();
+    $computers = $cnx->getRepository(Computer::class)->findAll();
+
 
     return $this->render('@App/Computer/show.html.twig', [
-
+        'computers'   => $computers
     ]);
 
   }

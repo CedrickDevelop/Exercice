@@ -4,6 +4,7 @@ namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -19,6 +20,10 @@ class ComputerType extends AbstractType
         ->add('model')
         ->add('system')
         ->add('macAdresse')
+        ->add('images', FileType::class, [
+            'data_class'    => null,
+            'multiple'    => true
+        ])
         ->add('purchase', DateType::class, [
             'widget'    =>  'single_text'
         ])

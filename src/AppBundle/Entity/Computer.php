@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use AppBundle\Entity\Departement;
 
 /**
  * Computer
@@ -41,6 +42,13 @@ class Computer
      * @ORM\Column(name="macAdresse", type="string", length=255)
      */
     private $macAdresse;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="images", type="array")
+     */
+    private $images;
 
     /**
      * @var \DateTime
@@ -186,5 +194,29 @@ class Computer
     public function getMacAdresse()
     {
         return $this->macAdresse;
+    }
+
+    /**
+     * Set images
+     *
+     * @param array $images
+     *
+     * @return Computer
+     */
+    public function setImages($images)
+    {
+        $this->images = $images;
+
+        return $this;
+    }
+
+    /**
+     * Get images
+     *
+     * @return array
+     */
+    public function getImages()
+    {
+        return $this->images;
     }
 }
