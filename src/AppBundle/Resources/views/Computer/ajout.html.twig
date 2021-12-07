@@ -3,31 +3,63 @@
 {% block title %}Ajout d'un computer{% endblock %}
 
 {% block body %}
-<h1 class="text-center text-dark mt-5">Ajouter un domaine dont le nom de département est : {{domaine}}</h1>
 
-{% for message in app.flashes('error') %}
-    <div class="alert alert-danger">
-                {{ message }}
+<div class="container d-flex justify-content-center align-items-center">
+
+    <div class="d-flex flex-column justify-content-center align-items-center">
+
+      <h1 class="text-center text-dark mt-5 mb-5">Ajouter un domaine pour le département <span class="text-success">{{domaine}}</span></h1>
+  
+      {% if domaine is same as ('informatique') %}
+      <img src="https://cdn.pixabay.com/photo/2017/04/10/07/57/processor-2217771_960_720.jpg" style="max-width:80%; max-height:80%;" >
+
+      {% elseif domaine is same as ('gestion') %}
+      <img src="https://cdn.pixabay.com/photo/2018/03/15/16/11/background-3228704_960_720.jpg" style="max-width:80%; max-height:80%;" >
+
+      {% elseif domaine is same as ('mathematique') %}
+      <img src="https://cdn.pixabay.com/photo/2021/11/04/06/27/artificial-intelligence-6767502_960_720.jpg" style="max-width:80%; max-height:80%;" >
+        
+      {% endif %}
+
     </div>
-{% endfor %}
+    
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-danger">
+                    {{ message }}
+        </div>
+    {% endfor %}
+    
+    {{ form_start(form, {'attr': {'class': 'w-50 m-5', novalidate:'novalidate'}})}}
+    
+    <div class="mb-3">
+      {{ form_label(form.model)}}
+      {{ form_widget(form.model)}}
+    </div>
+    <div class="text-danger">{{ form_errors(form.model)}}</div> 
+    
+    
+    <div class="mb-3">
+      {{ form_label(form.system)}}
+      {{ form_widget(form.system)}}
+    </div>
+    <div class="text-danger">{{ form_errors(form.system)}}</div> 
+    
+    <div class="mb-3">
+      {{ form_label(form.macAdresse)}}
+      {{ form_widget(form.macAdresse)}}
+    </div>
+    <div class="text-danger">{{ form_errors(form.macAdresse)}}</div> 
+    
+    <div class="mb-3">
+      {{ form_label(form.purchase)}}
+      {{ form_widget(form.purchase)}}
+    </div>
+    <div class="text-danger">{{ form_errors(form.purchase)}}</div> 
+    
+    
+    
+    {{ form_end(form)}}
 
-{{ form_start(form, {'attr': {'class': 'w-50 m-5'}})}}
-
-<div class="mb-3">
-  {{ form_label(form.model)}}
-  {{ form_widget(form.model)}}
 </div>
-<div class="mb-3">
-  {{ form_label(form.system)}}
-  {{ form_widget(form.system)}}
-</div>
-<div class="mb-3">
-  {{ form_label(form.purchase)}}
-  {{ form_widget(form.purchase)}}
-</div>
-
-
-
-{{ form_end(form)}}
 
 {% endblock %}

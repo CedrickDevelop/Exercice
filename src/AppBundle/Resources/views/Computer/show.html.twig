@@ -6,49 +6,49 @@
 
 {# TITRE & BOUTON AJOUTER UN ELEMENT #}
 <h1 class="text-center mt-5">Affichage computers</h1>
-
-{# <a class="btn btn-primary ms-5" href="{{path('AddDepartement')}}">Ajouter un nouvel élément</a> #}
-
-
-
-{# TABLEAU DES DATAS  #}
-<table class="table table-primary table-hover m-5 w-75">
   
-  <thead>
-    <tr>
-      <th scope="col">Model</th>
-      <th scope="col">Systeme</th>
-      <th scope="col">MacAdresse</th>
-      <th scope="col">Date</th>
-      <th scope="col">Domaine</th>
-      {# <th scope="col">Supprimer</th> #}
-      {# <th scope="col">Supprimer</th>
-      <th scope="col">Ajout Computer</th> #}
-    </tr>
-  </thead>
+  {# TABLEAU DES DATAS  #}
+  <table class="table table-hover p-5 w-100">
+    
+    <thead>
+      <tr>
+        <th scope="col">Model</th>
+        <th scope="col">Systeme</th>
+        <th scope="col">MacAdresse</th>
+        <th scope="col">Date</th>
+        <th scope="col">Domaine</th>
+        <th scope="col" colspan="12" class="text-center">images</th>
+      </tr>
+    </thead>
+    
+    <tbody>
+      
+      {% for c in computers %}
   
-  <tbody>
-    
-    {% for c in computers %}
-
-
-    <tr>
-      <td>{{c.model}}</td>
-      <td>{{c.system}}</td>
-      <td>{{c.macAdresse}}</td>
-      <td>{{c.purchase | date('d-m-Y')}}</td>
-      <td>{{c.nameDepartement.name}}</td>
-      {# <td><a class="btn btn-info" href="{{path('AfficherOne', {'id':d.id})}}">Info</a></td>
-      <td><a class="btn btn-warning" href="{{path('Update', {'id':d.id})}}">Modifier</a></td>
-      <td><a class="btn btn-danger" href="{{path('Delete', {'id':d.id})}}">Supprimer</a></td>
-      <td><a class="btn btn-warning" href="{{path('AddComputer', {'depId':d.id})}}">Ajout Computer</a></td> #}
-    </tr>
-    
-    
-    {% endfor %}
-
-  </tbody>
-</table>
-
+  
+      <tr>
+        <td>{{c.model}}</td>
+        <td>{{c.system}}</td>
+        <td>{{c.macAdresse}}</td>
+        <td>{{c.purchase | date('d-m-Y')}}</td>
+        <td>{{c.nameDepartement.name}}</td>
+  
+        {% if c.images is not empty %}
+          
+          {% for image in c.images %}
+          <td class="text-center"><img src="{{asset('PJComputers/'~ image)}}" class="img-thumbnail" style="width: 50px; height: 50px" ></td>
+          {% endfor %}
+  
+          {% else %}
+          <td colspan="12" class="text-center"> Pas d'images enregistrées</td>
+  
+        {% endif %}
+      </tr>
+      
+      
+      {% endfor %}
+  
+    </tbody>
+  </table>
 
 {% endblock %}
